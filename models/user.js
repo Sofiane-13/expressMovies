@@ -3,7 +3,7 @@ const config = require('config');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
-const userSchema =  new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -26,8 +26,11 @@ const userSchema =  new mongoose.Schema({
   isAdmin: Boolean
 });
 
-userSchema.methods.generateAuthToken = function() {
-  const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin}, config.get('jwtPrivateKey'));
+userSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign({
+    _id: this._id,
+    isAdmin: this.isAdmin
+  }, config.get('jwtPrivateKey'));
   return token;
 }
 
@@ -43,5 +46,5 @@ function validateUser(user) {
   return Joi.validate(user, schema);
 }
 
-exports.User = User; 
+exports.User = User;
 exports.validate = validateUser;

@@ -25,11 +25,11 @@ function validateCustomer(customer) {
     name: Joi.string().min(5).max(50).required(),
     isGold: Joi.boolean(),
     phone: Joi.string().min(5).max(50).required()
-    
+
   };
 
   return Joi.validate(customer, schema);
 }
 
-exports.Customer = Customer; 
+exports.Customer = Customer;
 exports.validate = validateCustomer;

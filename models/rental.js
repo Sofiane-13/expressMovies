@@ -34,14 +34,14 @@ const rental = mongoose.model('Rental', new mongoose.Schema({
                 minlength: 5,
                 maxlength: 255
             },
-        dailyRentaleRate: {
-            type: Number,
-            required: true,
-            min: 0,
-            max: 255
-        }
+            dailyRentaleRate: {
+                type: Number,
+                required: true,
+                min: 0,
+                max: 255
+            }
         }),
-    required: true
+        required: true
     },
     dateOut: {
         type: Date,
