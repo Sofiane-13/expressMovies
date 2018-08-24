@@ -1,7 +1,8 @@
-Joi.objectId = require('joi-objectid')(Joi);
+
 const winston = require('winston');
 const config = require('config');
 const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
 
 const genres = require('./routes/genres');
@@ -16,7 +17,7 @@ const express = require('express');
 const app = express();
 
 // handling errors
-winston.handleException(
+winston.handleExceptions(
   new winston.transports.File({ filename: 'uncaughtExceptions.log'}));
 
 process.on('unhandledRejection',(ex) => {
