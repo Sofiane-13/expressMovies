@@ -19,4 +19,8 @@ module.exports = function(app) {
     app.use('/api/rentals', rentals);
     app.use('/api/auth', auth);
     app.use(error);
+    // app.use(function(err, req, res, next){
+    //     // Log the exception
+    //     res.status(500).send('Somthing failed.');
+    // });
 }

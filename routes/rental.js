@@ -1,4 +1,5 @@
 const auth = require('../middleware/auth');
+const asyncMiddleware = require('../middleware/async');
 
 const {
     Rental,
@@ -19,12 +20,12 @@ const Fawn = require('fawn');
 
 Fawn.init(mongoose);
 
-router.get('/', auth, async (req, res) => {
+router.get('/', auth, asyncMiddleware(async (req, res) => {
     const rentals = await Rental.find().sort('-dateOut');
     res.send(rentals);
-});
+}));
 
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, asyncMiddleware(async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -70,14 +71,14 @@ router.post('/', auth, async (req, res) => {
     }
 
 
-});
+}));
 
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', auth, asyncMiddleware(async (req, res) => {
     const rental = await Rental.findById(req.params.id);
 
     if (!rental) return res.status(404).send('The rental with the given ID was not found.');
 
     res.send(rental);
-});
+}));
 
 module.exports = router;
