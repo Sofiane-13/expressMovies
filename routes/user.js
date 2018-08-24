@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
-const asyncMiddleware = require('../middleware/async');
 
 
 const {
@@ -14,11 +13,11 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
-router.get('/me', auth, asyncMiddleware(async (req, res) => {
+router.get('/me', auth, (async (req, res) => {
   const user = await User.findById(req.user._id).select('-password');
   res.send(user);
 }));
-router.post('/', asyncMiddleware(async (req, res) => {
+router.post('/', (async (req, res) => {
   const {
     error
   } = validate(req.body);
