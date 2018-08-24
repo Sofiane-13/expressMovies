@@ -6,6 +6,7 @@ require('express-async-errors');
 module.exports = function () {
     // handling errors
     winston.handleExceptions(
+        new winston.transports.Console({ colorize: true, prettyPrint: true }),
         new winston.transports.File({
             filename: 'uncaughtExceptions.log'
         }));
